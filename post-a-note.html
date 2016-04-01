@@ -1,15 +1,12 @@
 <head>
     <title>post-a-note</title>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-    <h1>post-a-note</h1>
-
-    <div id="new-note-container">
         {{> newNote}}
-    </div>
-
 <!--
     {{#each notes}}
         {{geo.lat}}<br>
@@ -17,11 +14,20 @@
 </body>
 
 <template name="newNote">
-    <form id="new-note">
-        <input id="title" type="text" placeholder="New Note">
-        <textarea id="description" placeholder="I can only note that the past is beautiful because one never realises an emotion at the time. It expands later, and thus we don't have complete emotions about the present, only about the past."></textarea>
-        <input id="upload-file" type="file" accept=".jpg, .jpeg, .png, .pdf">
-        <br>
-        <button type="submit">Post!</button>
-    </form>
+    <h1>post-a-note</h1>
+    <div id="new-note-container">
+        <form id="new-note">
+            <input id="title" type="text" placeholder="New Note">
+            <textarea id="description" placeholder="I can only note that the past is beautiful because one never realises an emotion at the time. It expands later, and thus we don't have complete emotions about the present, only about the past."></textarea>
+            <input id="upload-file" type="file" accept=".jpg, .jpeg, .png, .pdf">
+            <br>
+            <button type="submit">Post!</button>
+        </form>
+    </div>
+</template>
+
+
+<template name="showNote">
+    <h2>{{title}}</h2>
+    <p>{{description}}</p>
 </template>

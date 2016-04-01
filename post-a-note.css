@@ -1,8 +1,9 @@
 /* CSS declarations go here */
 body {
-    font-family: Arial;
+    font-family: "Pontano Sans";
     text-align: center;
     font-size: 12pt;
+    background-color: #ffe065;
 }
 
 #new-note-container {
@@ -20,10 +21,16 @@ body {
     color: white;
     border: 0px;
     padding: 10px;
+    font-family: "Pontano Sans";
+    font-weight: 600;
 }
 
 #title::-webkit-input-placeholder {
     color: #8bd8b4;
+}
+
+h1 {
+    font-family: Lobster;
 }
 
 #description {
@@ -35,6 +42,8 @@ body {
     padding: 10px;
     color: white;
     margin-bottom: 30px;
+    font-family: "Pontano Sans";
+    font-weight: 400;
 }
 
 #description::-webkit-input-placeholder {
@@ -49,4 +58,5 @@ button {
     color: white;
     background-color: #f16745;
     border: 0px;
+    font-family: Lobster;
 }
