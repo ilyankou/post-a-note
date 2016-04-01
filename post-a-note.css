@@ -1,1 +1,52 @@
 /* CSS declarations go here */
+body {
+    font-family: Arial;
+    text-align: center;
+    font-size: 12pt;
+}
+
+#new-note-container {
+    width: 90vw;
+    max-width: 600px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title {
+    font-size: 24pt;
+    width: 100%;
+    background-color: #7bc8a4;
+    color: white;
+    border: 0px;
+    padding: 10px;
+}
+
+#title::-webkit-input-placeholder {
+    color: #8bd8b4;
+}
+
+#description {
+    width: 100%;
+    min-height: 200px;
+    font-size: 16pt;
+    border: 0px;
+    background-color: #93648d;
+    padding: 10px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+#description::-webkit-input-placeholder {
+    color: #a3849d;
+}
+
+button {
+    width: 50%;
+    font-size: 28pt;
+    margin-top: 30px;
+    padding: 10px;
+    color: white;
+    background-color: #f16745;
+    border: 0px;
+}

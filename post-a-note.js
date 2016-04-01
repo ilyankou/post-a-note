@@ -1,17 +1,24 @@
+Notes = new Mongo.Collection("notes");
+
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
 
-  Template.newNote.helpers({
-    counter: function () {
-      return Session.get('counter');
+  Template.body.helpers({
+    notes: function () {
+      return Notes.find({});
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
+  Template.newNote.events({
+    'submit form': function () {
+      event.preventDefault();
+
+      var title = $("#title").val().trim();
+      var description = $("#description").val().trim();
+      Meteor.call("addNote", title, description);
+
+      console.log(title);
     }
   });
 }
@@ -21,3 +28,16 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
+
+Meteor.methods({
+    addNote: function(title, description) {
+        Notes.insert({
+            title: title,
+            description: description,
+            file: "",
+            createdAt: new Date(),
+            geo: "",
+        });
+    }
+});
