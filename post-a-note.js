@@ -16,9 +16,20 @@ if (Meteor.isClient) {
 
       var title = $("#title").val().trim();
       var description = $("#description").val().trim();
-      Meteor.call("addNote", title, description);
+      var lat, lon;
 
-      console.log(title);
+      if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              lat = position.coords.latitude;
+              lon = position.coords.longitude;
+              Meteor.call("addNote", title, description, {"lat": lat, "lon": lon});
+
+          });
+      }
+      else {
+            Meteor.call("addNote", title, description, {"lat": 0, "lon": 0});
+      }
+
     }
   });
 }
@@ -31,13 +42,13 @@ if (Meteor.isServer) {
 
 
 Meteor.methods({
-    addNote: function(title, description) {
+    addNote: function(title, description, geo) {
         Notes.insert({
             title: title,
             description: description,
             file: "",
             createdAt: new Date(),
-            geo: "",
+            geo: geo,
         });
     }
 });
