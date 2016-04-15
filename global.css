@@ -1,0 +1,18 @@
+body {
+    font-family: "Pontano Sans";
+    text-align: center;
+    font-size: 12pt;
+    background-color: #ffe065;
+}
+
+div.main-container {
+    width: 90vw;
+    max-width: 600px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-family: Lobster;
+}

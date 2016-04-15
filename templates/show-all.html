@@ -1,0 +1,12 @@
+<template name="showAll">
+    <ul>
+        {{#each notes}}
+        <ul>
+            <li>{{_id}}</li>
+            <li>{{title}}</li>
+            <li>{{description}}</li>
+            <li>{{key}}</li>
+        </ul>
+        {{/each}}
+    </ul>
+</template>
