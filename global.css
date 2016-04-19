@@ -1,18 +1,22 @@
 body {
     font-family: "Pontano Sans";
-    text-align: center;
     font-size: 12pt;
     background-color: #ffe065;
+    background-color: #efefef;
+    padding: 0px;
+    margin: 0px;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
-div.main-container {
-    width: 90vw;
-    max-width: 600px;
+div.container {
+    width: 100vw;
     padding: 0px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0px;
 }
 
 h1 {
     font-family: Lobster;
+    text-align: center;
+    font-size: 6vh;
 }

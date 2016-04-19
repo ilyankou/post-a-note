@@ -1,10 +1,19 @@
 <template name="addNote">
-    <h1>New Note</h1>
-    <div class="main-container">
-        <form id="new-note">
-            <input id="title" type="text" placeholder="Emotions of the present">
-            <textarea id="description" placeholder="I can only note that the past is beautiful because one never realises an emotion at the time. It expands later, and thus we don't have complete emotions about the present, only about the past."></textarea>
-            <button type="submit">Post!</button>
-        </form>
-    </div>
+    <form id="new-note">
+        <div class="container title center">
+            <input id="title" class="title white" type="text" placeholder="Emotions of the present">
+        </div>
+
+        <div class="container center description">
+            <textarea id="description" class="description white" placeholder="I can only note that the past is beautiful because one never realises an emotion at the time. It expands later, and thus we don't have complete emotions about the present, only about the past."></textarea>
+        </div>
+
+
+        <div id="scrolling">
+            <ul id="color-picker">
+            </ul>
+        </div>
+
+        <button type="submit">Post!</button>
+    </form>
 </template>
