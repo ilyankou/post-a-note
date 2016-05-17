@@ -1,28 +1,27 @@
+colorSchemes = {
+    'standard': {'t': "#7bc8a4", 'd': "#93648d"},
+    'move-up': {'t': "#340926", 'd': "#EFC31F"},
+    'dano-red': {'t': "#D03958", 'd': "#E3D5B8"},
+    'woods': {'t': "#1A3C3D", 'd': "#84A174"},
+    'more-than-enough': {'t': "#665178", 'd': "#A9CDC3"},
+    'dano-aqua': {'t': "#95D1C5", 'd': "#E3D5B8"},
+    'last-summer': {'t': "#EFE700", 'd': "#004E72"},
+    'casual-tuesday': {'t': "#9DE7A0", 'd': "#DAE2C1"},
+    'baby-talk': {'t': "#26DEBC", 'd': "#E98B7D"},
+    'vanilla-peace': {'t': "#9AA4FE", 'd': "#E0EA90"},
+    'dawn-watch': {'t': "#003A54", 'd': "#325D6F"},
+    'octopod-hotel': {'t': "#F1EADC", 'd': "#1493A5"},
+    'dynamo': {'t': "#E42369", 'd': "#CEFFBD"},
+    'young-alice': {'t': "#25B38F", 'd': "#FABED6"},
+    'pavlov': {'t': "#DDE91E", 'd': "#E64572"},
+    'see-me': {'t': "#26DEBC", 'd': "#CC4686"},
+    'velvet': {'t': "#B00029", 'd': "#EC6348"}
+}
+
 if (Meteor.isClient) {
 
-    var colorSchemes = {
-        'standard': {'t': "#7bc8a4", 'd': "#93648d"},
-        'move-up': {'t': "#340926", 'd': "#EFC31F"},
-        'dano-red': {'t': "#D03958", 'd': "#E3D5B8"},
-        'woods': {'t': "#1A3C3D", 'd': "#84A174"},
-        'more-than-enough': {'t': "#665178", 'd': "#A9CDC3"},
-        'dano-aqua': {'t': "#95D1C5", 'd': "#E3D5B8"},
-        'last-summer': {'t': "#EFE700", 'd': "#004E72"},
-        'casual-tuesday': {'t': "#9DE7A0", 'd': "#DAE2C1"},
-        'baby-talk': {'t': "#26DEBC", 'd': "#E98B7D"},
-        'vanilla-peace': {'t': "#9AA4FE", 'd': "#E0EA90"},
-        'dawn-watch': {'t': "#003A54", 'd': "#325D6F"},
-        'octopod-hotel': {'t': "#F1EADC", 'd': "#1493A5"},
-        'dynamo': {'t': "#E42369", 'd': "#CEFFBD"},
-        'young-alice': {'t': "#25B38F", 'd': "#FABED6"},
-        'pavlov': {'t': "#DDE91E", 'd': "#E64572"},
-        'see-me': {'t': "#26DEBC", 'd': "#CC4686"},
-        'velvet': {'t': "#B00029", 'd': "#EC6348"},
-
-    }
-
-    String.prototype.replaceAt=function(index, character) {
-        return this.substr(0, index) + character + this.substr(index+character.length);
+    String.prototype.replaceAt = function(index, character) {
+        return this.substr(0, index) + character + this.substr(index + character.length);
     }
 
     function inc(a) {
@@ -45,6 +44,14 @@ if (Meteor.isClient) {
         }
     }
 
+    function longEnough() {
+        if (($("#description").val().trim().length > 10) &&
+            ($("#title").val().trim().length > 2)) {
+                return 1;
+            }
+        return 0;
+    }
+
     Template.addNote.onRendered(function() {
         $('#qrcode').qrcode("this plugin is great");
 
@@ -54,10 +61,8 @@ if (Meteor.isClient) {
             var li = "<li class='" + color + "'>";
             li += "<div class='color-picker-title' style='background-color: " + data.t + "'></div>";
             li += "<div class='color-picker-description' style='background-color: " + data.d + "'></div>";
-            li += "</li>"
+            li += "</li>";
             $("#color-picker").append(li);
-
-            console.log(data.t.charAt(1));
 
             var t = data.t;
             var d = data.d;
@@ -74,7 +79,7 @@ if (Meteor.isClient) {
         $("body").append(placeholderColors);
 
         var carousel = $("#color-picker");
-        carousel.itemslide();
+        carousel.itemslide({start: 8});
 
         $("#color-picker li").click(function() {
             var scheme = $(this).attr("class").split(' ')[0];
@@ -91,11 +96,20 @@ if (Meteor.isClient) {
             $("#title, #description").addClass(scheme);
         });
 
+        $("#color-picker li.baby-talk").click();
+
         $(window).resize(function() {
             carousel.reload();
         });
 
-        $("#color-picker li.standard").click();
+        $("#description, #title").keyup(function() {
+            if (longEnough()) {
+                $("#post-button").attr("disabled", false);
+            } else {
+                $("#post-button").attr("disabled", true);
+            }
+        });
+
     });
 
     function generateKey() {
@@ -103,29 +117,56 @@ if (Meteor.isClient) {
         var key = "";
         var alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        for (i = 0; i < 15; i++)
+        for (i = 0; i < 30; i++)
             key += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
 
         return key;
     }
 
     Template.addNote.events({
+        'click #world': function() {
+            Router.go("/");
+        },
+
         'submit form': function () {
             event.preventDefault();
 
             var title = $("#title").val().trim();
             var description = $("#description").val().trim();
+            var colorScheme = $(".itemslide-active").attr("class").split(' ')[0];
+
+            var key = generateKey();
+            var id;
 
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
-                    Meteor.call("addNote", title, description, {"lat": lat, "lon": lon}, generateKey());
+                    Meteor.call("addNote", title, description, {"lat": lat, "lon": lon}, colorScheme, key, function(error, result){
+                        id = result;
+                        $("#qr-view").qrcode("http://localhost:3000/view/" + id);
+                    });
                 });
             }
             else {
-                Meteor.call("addNote", title, description, {"lat": 0, "lon": 0}, generateKey());
+                Meteor.call("addNote", title, description, {"lat": 0, "lon": 0}, colorScheme, key, function(error, result){
+                    id = result;
+                    $("#qr-view").qrcode("http://localhost:3000/view/" + id);
+                });
             }
+
+            $("#qr-container").css("display", "block");
+
+            $("#qr-view").click(function() {
+                window.print();
+                /*
+                var qr = $("#qr-view canvas").get(0).toDataURL("image/png");
+                $("#qr-view").attr("href", qr); */
+            });
+
+            $("#qr-close").click(function() {
+                Router.go("/view/" + id);
+            });
         }
     });
 

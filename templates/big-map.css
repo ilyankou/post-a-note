@@ -1,0 +1,12 @@
+#bigMap {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    background-color: yellow;
+}
+
+h6 {
+    color: black;
+    font-size: 16pt;
+    margin: 15px;
+}

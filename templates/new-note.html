@@ -1,19 +1,34 @@
 <template name="addNote">
+
     <form id="new-note">
         <div class="container title center">
             <input id="title" class="title white" type="text" placeholder="Emotions of the present">
+        </div>
+
+        <div id="world" class="square-button">
+            <i class="fa fa-map"></i>
         </div>
 
         <div class="container center description">
             <textarea id="description" class="description white" placeholder="I can only note that the past is beautiful because one never realises an emotion at the time. It expands later, and thus we don't have complete emotions about the present, only about the past."></textarea>
         </div>
 
-
         <div id="scrolling">
             <ul id="color-picker">
             </ul>
         </div>
 
-        <button type="submit">Post!</button>
+        <button id="post-button" type="submit" disabled>Post!</button>
     </form>
+
+    <div class="container" id="qr-container">
+        <div id="qr-close">
+            <i class="fa fa-close"></i>
+        </div>
+
+        <a id="qr-view" download="my-note.png" href=""></a>
+
+        <div id="qr-edit"></div>
+    </div>
+
 </template>

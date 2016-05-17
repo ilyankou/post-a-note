@@ -1,12 +1,12 @@
 body {
     font-family: "Pontano Sans";
     font-size: 12pt;
-    background-color: #ffe065;
     background-color: #efefef;
     padding: 0px;
     margin: 0px;
-    overflow-y: hidden;
+    /*overflow-y: hidden; */
     overflow-x: hidden;
+    color: white;
 }
 
 div.container {
@@ -18,5 +18,31 @@ div.container {
 h1 {
     font-family: Lobster;
     text-align: center;
+    font-size: 11vh;
+}
+
+.square-button {
+    display: block;
+    height: 7vh;
+    width: 7vh;
+    position: absolute;
+    margin: 1vh 1vh 0 0;
+    right: 0px;
+    top: 0px;
     font-size: 6vh;
+    padding: 1vh;
+    background-color: yellow;
+    cursor: pointer;
+    text-align: center;
+}
+
+.title {
+    height: 11vh;
+    font-size: 8vh;
+    width: 90vw;
+    border: 0px;
+    padding: 0px;
+    font-family: "Lobster";
+    font-weight: 600;
+    text-align: center;
 }
