@@ -141,7 +141,7 @@ if (Meteor.isClient) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
-                    Meteor.call("addNote", title, description, {"lat": lat + 0.01, "lon": lon-0.01}, colorScheme, key, function(error, result){
+                    Meteor.call("addNote", title, description, {"lat": lat, "lon": lon}, colorScheme, key, function(error, result){
                         id = result;
                     });
                 });
