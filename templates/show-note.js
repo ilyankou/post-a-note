@@ -3,7 +3,6 @@ if (Meteor.isClient) {
     Template.showNote.events({
         'click #world': function() {
             Router.go("/");
-
         }
     });
 

@@ -1,10 +1,23 @@
 <template name="editNote">
-    <h1>Edit note</h1>
-    <div class="main-container">
-        <form id="new-note">
-            <input id="title" type="text" value="{{title}}">
-            <textarea id="description" value={{description}}></textarea>
-            <button type="submit">Update!</button>
-        </form>
-    </div>
+
+    <form id="new-note">
+        <div class="container title center">
+            <input id="title" class="title white" type="text" placeholder="{{title}}" value="{{title}}">
+        </div>
+
+        <div id="world" class="square-button">
+            <i class="fa fa-map"></i>
+        </div>
+
+        <div class="container center description">
+            <textarea id="description" class="description white" placeholder="{{description}}" value="{{description}}"></textarea>
+        </div>
+
+        <div id="scrolling">
+            <ul id="color-picker">
+            </ul>
+        </div>
+
+        <button id="post-button" type="submit" disabled>Update!</button>
+    </form>
 </template>

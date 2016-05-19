@@ -19,7 +19,6 @@ colorSchemes = {
 }
 
 if (Meteor.isClient) {
-
     String.prototype.replaceAt = function(index, character) {
         return this.substr(0, index) + character + this.substr(index + character.length);
     }
@@ -142,26 +141,23 @@ if (Meteor.isClient) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var lat = position.coords.latitude;
                     var lon = position.coords.longitude;
-                    Meteor.call("addNote", title, description, {"lat": lat, "lon": lon}, colorScheme, key, function(error, result){
+                    Meteor.call("addNote", title, description, {"lat": lat + 0.01, "lon": lon-0.01}, colorScheme, key, function(error, result){
                         id = result;
-                        $("#qr-view").qrcode("http://localhost:3000/view/" + id);
                     });
                 });
             }
             else {
                 Meteor.call("addNote", title, description, {"lat": 0, "lon": 0}, colorScheme, key, function(error, result){
                     id = result;
-                    $("#qr-view").qrcode("http://localhost:3000/view/" + id);
                 });
             }
 
+            $("#qr-view").qrcode("http://localhost:3000/view/" + id);
+            $("#key-input").attr("value", "http://localhost:3000/edit/" + key);
             $("#qr-container").css("display", "block");
 
             $("#qr-view").click(function() {
                 window.print();
-                /*
-                var qr = $("#qr-view canvas").get(0).toDataURL("image/png");
-                $("#qr-view").attr("href", qr); */
             });
 
             $("#qr-close").click(function() {
