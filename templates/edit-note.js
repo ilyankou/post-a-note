@@ -109,6 +109,8 @@ if (Meteor.isClient) {
             $("#title, #description").addClass(scheme);
         });
 
+        $("#color-picker li.baby-talk").click();
+
         $(window).resize(function() {
             carousel.reload();
         });
