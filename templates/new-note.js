@@ -156,8 +156,15 @@ if (Meteor.isClient) {
             $("#key-input").attr("value", "http://localhost:3000/edit/" + key);
             $("#qr-container").css("display", "block");
 
-            $("#qr-view").click(function() {
+            $("#qr-color").click(function() {
                 window.print();
+            });
+
+            $("#qr-color").hover(function() {
+              $(this).css("opacity", "0.9");
+            },
+            function() {
+              $(this).css("opacity", "0");
             });
 
             $("#qr-close").click(function() {

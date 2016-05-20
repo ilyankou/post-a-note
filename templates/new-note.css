@@ -128,6 +128,36 @@ button {
     width: 50vh;
 }
 
+.qr-square {
+  height: 50vh;
+  width: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: block;
+}
+
+#qr-color {
+  background-color: yellow;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.0;
+  font-size: 30vh;
+  text-align: center;
+}
+
+#qr-color i {
+  display: block;
+  margin-top: 8vh;
+}
+
 #key-input {
     height: 5vh;
     font-size: 4vh;
@@ -156,7 +186,7 @@ button {
         visibility: visible;
     }
 
-    #qr-close {
+    #qr-close, #qr-color {
         display: none;
     }
 
